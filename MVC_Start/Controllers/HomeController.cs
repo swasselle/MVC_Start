@@ -7,17 +7,44 @@ using MVC_Start.Models;
 
 namespace MVC_Start.Controllers
 {
-  public class HomeController : Controller
-  {
-    public IActionResult Index()
+    public class HomeController : Controller
     {
-      return View();
-    }
+        public IActionResult Index(int id)
+        {
+            return View();
+        }
 
-    public IActionResult IndexWithLayout()
-    {
-      return View();
-    }
+        public IActionResult IndexWithLayout()
+        {
+            return View();
+        }
+
+
+
+
+        public IActionResult Contact()
+        {
+            GuestContact contact = new GuestContact();
+
+            contact.Name = "Sarah Wasselle";
+            contact.City = "Tampa";
+            contact.State = "FL";
+
+
+
+            //ViewData["Message"] = "Your contact page.";
+
+            return View(contact);
+        }
+
+        [HttpPost]
+        public IActionResult Contact(GuestContact contact)
+        {
+            return View(contact);
+        }
+
+
+
 
         /// <summary>
         /// Replicate the chart example in the JavaScript presentation
@@ -29,19 +56,20 @@ namespace MVC_Start.Controllers
         /// </summary>
         /// <returns>View that will display the chart</returns>
         public ViewResult DemoChart()
-    {
-      string[] ChartLabels = new string[] { "Africa", "Asia", "Europe", "Latin America", "North America" };
-      int[] ChartData = new int[] { 2478, 5267, 734, 784, 433 };
+        {
+            string[] ChartLabels = new string[] { "Africa", "Asia", "Europe", "Latin America", "North America" };
+            int[] ChartData = new int[] { 2478, 5267, 734, 784, 433 };
 
-      ChartModel Model = new ChartModel
-      {
-        ChartType = "bar",
-        Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'")),
-        Data = String.Join(",", ChartData.Select(d => d)),
-        Title = "Predicted world population (millions) in 2050"
-      };
+            ChartModel Model = new ChartModel
+            {
+                ChartType = "bar",
+                Labels = String.Join(",", ChartLabels.Select(d => "'" + d + "'")),
+                Data = String.Join(",", ChartData.Select(d => d)),
+                Title = "Predicted world population (millions) in 2050"
+            };
 
-      return View(Model);
+            return View(Model);
+        }
     }
-  }
 }
+
